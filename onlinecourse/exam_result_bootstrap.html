@@ -1,0 +1,55 @@
+{% extends "onlinecourse/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Exam Results</h1>
+
+    {% if exam_results %}
+        <div class="alert alert-success">
+            <h2>Congratulations!</h2>
+            <p>You have completed the mock exam.</p>
+            <p><strong>Your score: {{ score }}</strong></p>
+        </div>
+
+        {% for result in exam_results %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>
+                        {{ forloop.counter }}.
+                        {{ result.question.question_text }}
+                    </h5>
+
+                    {% for choice in result.choices %}
+                        <p>
+                            {% if choice.id in result.selected_choices %}
+                                <strong>Your answer:</strong>
+                            {% endif %}
+
+                            {{ choice.choice_text }}
+
+                            {% if choice.is_correct %}
+                                <span class="text-success">
+                                    (Correct answer)
+                                </span>
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+
+                    {% if result.is_correct %}
+                        <span class="badge bg-success">Correct</span>
+                    {% else %}
+                        <span class="badge bg-danger">Incorrect</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No exam questions were found for this submission.</p>
+    {% endif %}
+
+    <a href="{% url 'onlinecourse:course_details' course.id %}"
+       class="btn btn-primary">
+        Return to Course
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }} | LearnHub</title>
+    <link rel="stylesheet"
+          href="{% static 'onlinecourse/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'onlinecourse:course_list' %}"
+           class="logo">LearnHub</a>
+        <a href="{% url 'onlinecourse:course_list' %}"
+           class="nav-link">All Courses</a>
+    </nav>
+
+    <main class="container">
+        <article class="detail-card">
+            <h1>{{ course.name }}</h1>
+
+            <p class="course-description">
+                {{ course.description }}
+            </p>
+
+            <hr>
+
+            <p>
+                <strong>Instructor:</strong>
+                {{ course.instructor }}
+            </p>
+
+            <p>
+                <strong>Duration:</strong>
+                {{ course.duration }}
+            </p>
+
+            <p class="price">
+                Price: {{ course.price }}
+            </p>
+
+            <a href="{% url 'onlinecourse:course_list' %}"
+               class="btn btn-secondary">
+                Back to Courses
+            </a>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 LearnHub. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

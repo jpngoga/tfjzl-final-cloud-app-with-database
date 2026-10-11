@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Courses</title>
+    <link rel="stylesheet"
+          href="{% static 'onlinecourse/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'onlinecourse:course_list' %}"
+           class="logo">LearnHub</a>
+        <a href="{% url 'onlinecourse:course_list' %}"
+           class="nav-link">All Courses</a>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Learn New Skills Online</h1>
+            <p>
+                Explore our courses, learn from instructors,
+                and take the next step in your education.
+            </p>
+        </section>
+
+        <h2>Available Courses</h2>
+
+        <div class="course-grid">
+            {% for course in courses %}
+                <article class="course-card">
+                    <h2>{{ course.name }}</h2>
+
+                    <p class="course-description">
+                        {{ course.description|truncatewords:20 }}
+                    </p>
+
+                    <p class="course-info">
+                        <strong>Instructor:</strong>
+                        {{ course.instructor }}
+                    </p>
+
+                    <p class="course-info">
+                        <strong>Duration:</strong>
+                        {{ course.duration }}
+                    </p>
+
+                    <p class="price">
+                        {{ course.price }}
+                    </p>
+
+                    <a class="btn"
+                       href="{% url 'onlinecourse:course_detail' course.id %}">
+                        View Course
+                    </a>
+                </article>
+            {% empty %}
+                <p class="empty-message">
+                    No courses are available yet.
+                    Please check back later.
+                </p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 LearnHub. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
